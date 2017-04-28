@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=no">
+    <meta content="telephone=no" name="format-detection">
+    <meta content="email=no" name="format-detection">
+    <!--<meta http-equiv="Content-Security-Policy"-->
+          <!--content="default-src *; frame-src 'self' yy://* jsbridge://* wvjbscheme://*  share: share:*; style-src 'self' http://*.okii.com https://*.okii.com https://hm.baidu.com 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' http://*.okii.com https://*.okii.com https://hm.baidu.com/;">-->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-touch-fullscreen" content="yes"/>
+    <link rel="stylesheet" href="country.css">
+    <title>字母导航</title>
+</head>
+<body>
+<div>
+    <dl class="country-title" id="list"></dl>
+</div>
+<ul class="letter-nav" id="letterNav">
+</ul>
+<script type="text/html" id="tpl">
+    <% for( var i = 0; i < country.length; i++ ) { %>
+    <dt id="<%= country[i].type %>"><%= country[i].type %></dt>
+    <% var list = country[i].list,j = 0 %>
+    <% for( ; j < list.length; j++ ) { %>
+    <dd><%= list[j].name %></dd>
+    <% } %>
+    <% } %>
+</script>
+<script type="text/html" id="letterTpl">
+    <% for( var i = 0; i < list.length; i++ ) { %>
+    <li data-id="<%= list[i] %>"><%= list[i] %></li>
+    <% } %>
+</script>
+<script src="template/template-native.js"></script>
+<script>
+	"use strict";
+	/**
+	 * xhr
+	 * @param method
+	 * @param url
+	 * @param success
+	 * @param fail
+	 */
+	function getJson(method, url, success, fail) {
+		var request = new XMLHttpRequest();
+		request.open(method || "get", url);//'./assert/country.json'
+		request.send();
+		request.onreadystatechange = function () {
+			if (request.readyState === 4) {
+				if (request.status === 200) {
+					success((new Function("", "return " + request.response))());
+				} else {
+					fail && fail(request);
+				}
+			}
+		};
+	}
+	/**
+	 * ID选择器
+	 */
+	function $(id) {
+		return document.getElementById(id);
+	}
+	/**
+	 * 渲染国家地区列表
+	 * 如果有缓存则取缓存
+	 */
+	function renderList() {
+		var country = localStorage.getItem('country'),
+			listEl = $('list');
+		if (country !== null) {
+			listEl.innerHTML = country;
+		} else {
+			getJson('get', './country.json', function (res) {
+				var tpl = template('tpl', {country: res});
+				localStorage.setItem('country', tpl);
+				listEl.innerHTML = tpl;
+			});
+		}
+	}
+
+	/**
+	 * 渲染字母导航
+	 */
+	function renderLetterNav() {
+		var letterTpl = localStorage.getItem('oLetter'),
+			html;
+		if (letterTpl !== null) {
+			html = letterTpl;
+		} else {
+			var letter = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "R", "S", "T", "W", "X", "Y", "Z"];
+			html = template('letterTpl', {list: letter});
+			localStorage.setItem('oLetter', html);
+		}
+		var $letTerNav = $('letterNav');
+		$letTerNav.innerHTML = html;
+	}
+	window.addEventListener('scroll',function (event) {
+		var top = document.documentElement.scrollTop || document.body.scrollTop;
+		console.log(top)
+
+	});
+	var $letTerNav = $('letterNav');
+	$letTerNav.addEventListener('click',function (event) {
+		var target = event.target;
+		if ( target.tagName === "LI" ) {
+			var sID = target.innerText;
+			var sOffsetTop = document.getElementById(sID).offsetTop;
+			setTimeout(function () {
+				document.body.scrollTop = sOffsetTop;
+			}, 10)
+
+        } else {
+
+        }
+	});
+	renderList();
+	renderLetterNav();
+
+</script>
+<script>
+	var _hmt = _hmt || [];
+	(function() {
+		var hm = document.createElement("script");
+		hm.src = "https://hm.baidu.com/hm.js?938094e2afe81a39516fd691a7abb9eb";
+		var s = document.getElementsByTagName("script")[0];
+		s.parentNode.insertBefore(hm, s);
+	})();
+
+</script>
+</body>
+</html>

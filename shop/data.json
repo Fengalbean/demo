@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "小米1",
+    "desc": "小米1手机 32G",
+    "count": 1030
+  },
+  {
+    "id": 2,
+    "name": "小米2",
+    "desc": "小米2手机 64G",
+    "count": 2100
+  },
+  {
+    "id": 3,
+    "name": "小米3",
+    "desc": "小米3手机 52G",
+    "count": 2000
+  },
+  {
+    "id": 4,
+    "name": "华为1",
+    "desc": "华为1手机 32G",
+    "count": 1000
+  },
+  {
+    "id": 5,
+    "name": "小米1",
+    "desc": "小米1手机 32G",
+    "count": 1000
+  },
+  {
+    "id": 6,
+    "name": "魅族手机6",
+    "desc": "魅族手机6手机 312G",
+    "count": 1000
+  },
+  {
+    "id": 7,
+    "name": "oppo r9s plus",
+    "desc": "oppo r9s plus手机 256G",
+    "count": 1337
+  },
+  {
+    "id": 8,
+    "name": "oppo r9",
+    "desc": "oppo r9手机 64G",
+    "count": 1000
+  },
+  {
+    "id": 9,
+    "name": "小米1",
+    "desc": "小米1手机 32G",
+    "count": 1000
+  },
+  {
+    "id": 10,
+    "name": "apple 6s",
+    "desc": "apple 6s手机 54G",
+    "count": 1000
+  },
+  {
+    "id": 11,
+    "name": "苹果7",
+    "desc": "苹果71手机 128G",
+    "count": 1500
+  }
+]
