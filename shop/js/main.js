@@ -88,7 +88,7 @@ $(function () {
 	});
 
 	$('#clear').on('click',function () {
-		Shop.clearStorege();
+		Shop.clearStorage();
 		renderShop();
 	})
 });
