@@ -118,39 +118,11 @@
     </tr>
     <% } %>
 </script>
-<script type="text/javascript" src="https://dn-bughd-web.qbox.me/bughd.min.js" crossOrigin="anonymous"></script>
-
-<script type="text/javascript">
-	window.bughd = window.bughd || function(){};
-	bughd("create",{key:"dcd217aa9af380bacd4484c6b5c447f9"})
-</script>
 <script src="../libs/jquery/3.0.0/jquery.min.js"></script>
 <script src="../libs/template/template-native.js"></script>
 <script src="js/Shop.js"></script>
 <script src="js/main.js"></script>
 
-<script>
-	var traverse = function(ndRoot) {
-		var stack = [ndRoot];
 
-		while (stack.length) {
-			var node = stack.shift();
-
-			printInfo(node);
-
-			if (!node.children.length) {
-				continue;
-			}
-
-			Array.from(node.children).forEach(function (x) {
-				stack.push(x)
-			} );
-		}
-	}
-    test();
-    function printInfo(node) {
-		console.log(node.tagName);
-	}
-</script>
 </body>
 </html>
